@@ -1,0 +1,6 @@
+<Project>
+	<PropertyGroup>
+		<MicrosoftExtensionsDependencyInjection>7.0.0</MicrosoftExtensionsDependencyInjection>
+		<EFCore>7.0.8</EFCore>
+	</PropertyGroup>
+</Project>
