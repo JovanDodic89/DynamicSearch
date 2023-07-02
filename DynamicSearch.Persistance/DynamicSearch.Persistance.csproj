@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EFCore)" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="$(MicrosoftExtensionsConfigurationAbstractions)" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(MicrosoftExtensionsDependencyInjection)" />
   </ItemGroup>
 

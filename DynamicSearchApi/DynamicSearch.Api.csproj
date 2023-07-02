@@ -12,6 +12,20 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="configuration\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DynamicSearch.Persistance\DynamicSearch.Persistance.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="configuration\appsettings.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="configuration\appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

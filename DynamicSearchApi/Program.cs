@@ -1,20 +1,30 @@
+using DynamicSearch.Persistance;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
+              .AddJsonFile("configuration/appsettings.json")
+              .AddJsonFile($"configuration/appsettings.{builder.Environment.EnvironmentName}.json")
+              .AddEnvironmentVariables()
+              .Build();
+
+
+
+//var clientsSection = builder.Configuration.GetSection("DatabaseClients:Clients");
+//var clients = clientsSection.Get<List<Client>>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 app.UseHttpsRedirection();
 
