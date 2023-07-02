@@ -8,3 +8,5 @@
 /DynamicSearch.Persistance/bin/Debug/net6.0
 /DynamicSearch.Persistance/obj
 /DynamicSearchApi/bin/Debug/net6.0
+/DynamicSearch.Domain/obj
+/DynamicSearch.Domain/bin/Debug/net6.0
