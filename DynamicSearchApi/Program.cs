@@ -1,10 +1,10 @@
 using DynamicSearch.Persistance;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 
 builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
               .AddJsonFile("configuration/appsettings.json")
@@ -12,19 +12,9 @@ builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
               .AddEnvironmentVariables()
               .Build();
 
-
-
-//var clientsSection = builder.Configuration.GetSection("DatabaseClients:Clients");
-//var clients = clientsSection.Get<List<Client>>();
+builder.Services.AddPersistanceServices(builder.Configuration);
 
 var app = builder.Build();
-
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 
 app.UseHttpsRedirection();
 

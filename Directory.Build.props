@@ -2,7 +2,8 @@
 	<PropertyGroup>
 		<MicrosoftExtensionsDependencyInjection>7.0.0</MicrosoftExtensionsDependencyInjection>
 		<MicrosoftExtensionsConfigurationAbstractions>7.0.0</MicrosoftExtensionsConfigurationAbstractions>
-		<EFCore>7.0.8</EFCore>
+		<MicrosoftExtensionsConfigurationBinder>7.0.4</MicrosoftExtensionsConfigurationBinder>
+		<EFCore>7.0.0</EFCore>
 		<MicrosoftCodeAnalysis>4.6.0</MicrosoftCodeAnalysis>
 	</PropertyGroup>
 </Project>
