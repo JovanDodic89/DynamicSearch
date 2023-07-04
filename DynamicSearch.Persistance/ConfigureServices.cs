@@ -40,7 +40,7 @@ namespace DynamicSearch.Persistance
             {
                 var connectionString = client.ConnectionString;
 
-                var dbOpts = new DatabaseModelFactoryOptions();
+                var dbOpts = new DatabaseModelFactoryOptions(client.IncludeTables, new List<string> { client.SchemaName });
                 var modelOpts = new ModelReverseEngineerOptions();
                 var codeGenOpts = new ModelCodeGenerationOptions()
                 {

@@ -9,12 +9,15 @@
 
   <ItemGroup>
 
-	  <PackageReference Include="Microsoft.CodeAnalysis" Version="4.6.0" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="7.0.0" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.0" />
+									<!--EF CORE PART  -->
+	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EFCore)" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="$(EFCore)" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EFCore)" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="$(EFCore)" />
+
 	  <PackageReference Include="Bricelam.EntityFrameworkCore.Pluralizer" Version="1.0.0" />
+	  <PackageReference Include="Microsoft.CodeAnalysis" Version="4.6.0" />
+
 	  <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
 	  <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
 	  
