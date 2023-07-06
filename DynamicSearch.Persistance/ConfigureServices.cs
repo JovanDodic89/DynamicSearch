@@ -28,7 +28,7 @@ namespace DynamicSearch.Persistance
 
         private static Type _test;
 
-        public static Type type { get { return _test; } }
+        public static Type Type { get { return _test; } }
 
         private static void AddDbContexts(IServiceCollection services, IConfiguration configuration)
         {
@@ -40,7 +40,7 @@ namespace DynamicSearch.Persistance
             {
                 var connectionString = client.ConnectionString;
 
-                var dbOpts = new DatabaseModelFactoryOptions(client.IncludeTables, new List<string> { client.SchemaName });
+                var dbOpts = new DatabaseModelFactoryOptions(client.IncludeTables, client.SchemaNames);
                 var modelOpts = new ModelReverseEngineerOptions();
                 var codeGenOpts = new ModelCodeGenerationOptions()
                 {
@@ -165,7 +165,7 @@ namespace DynamicSearch.Persistance
         {
             public string ConnectionString { get; set; }
             public string Name { get; set; }
-            public string SchemaName { get; set; }
+            public List<string> SchemaNames { get; set; }
             public List<string> IncludeTables { get; set; }
             public List<string> ExcludeTables { get; set; }
         }

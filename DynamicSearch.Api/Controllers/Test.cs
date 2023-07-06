@@ -10,7 +10,7 @@ namespace DynamicSearch.Api.Controllers
     {
         public Test(IServiceScopeFactory services)
         {
-            var dynamicContext = services.CreateScope().ServiceProvider.GetService(ConfigureServices.type) as DbContext;
+            var dynamicContext = services.CreateScope().ServiceProvider.GetService(ConfigureServices.Type) as DbContext;
 
             var entityTypes = dynamicContext.Model.GetEntityTypes();
 

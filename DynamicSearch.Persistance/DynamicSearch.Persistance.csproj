@@ -13,7 +13,8 @@
 	  <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EFCore)" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="$(EFCore)" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EFCore)" />
-	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="$(EFCore)" />
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="$(EFCore)">
+	  </PackageReference>
 
 	  <PackageReference Include="Bricelam.EntityFrameworkCore.Pluralizer" Version="1.0.0" />
 	  <PackageReference Include="Microsoft.CodeAnalysis" Version="4.6.0" />
