@@ -14,3 +14,5 @@
 /DynamicSearchApi/bin/Debug/net7.0
 /DynamicSearch.Api/bin/Debug/net7.0
 /DynamicSearch.Api/obj
+/DynamicSearch.Application/bin/Debug/net6.0
+/DynamicSearch.Application/obj
