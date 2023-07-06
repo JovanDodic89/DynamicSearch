@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DynamicSearch.Application\DynamicSearch.Application.csproj" />
     <ProjectReference Include="..\DynamicSearch.Persistance\DynamicSearch.Persistance.csproj" />
   </ItemGroup>
 
@@ -22,5 +23,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="$(FluentValidation)" />
+		<PackageReference Include="MediatR" Version="$(Mediator)" />
+	</ItemGroup>
 
 </Project>

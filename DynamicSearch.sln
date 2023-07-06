@@ -22,7 +22,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "project", "project", "{9B8A
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicSearch.Domain", "DynamicSearch.Domain\DynamicSearch.Domain.csproj", "{65AAC41B-C089-45D3-8373-0EA0A19D483D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicSearch.Domain", "DynamicSearch.Domain\DynamicSearch.Domain.csproj", "{65AAC41B-C089-45D3-8373-0EA0A19D483D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicSearch.Application", "DynamicSearch.Application\DynamicSearch.Application.csproj", "{1F64AA1B-84FB-4F73-8BFA-EB8471ECC27A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +44,10 @@ Global
 		{65AAC41B-C089-45D3-8373-0EA0A19D483D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65AAC41B-C089-45D3-8373-0EA0A19D483D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65AAC41B-C089-45D3-8373-0EA0A19D483D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1F64AA1B-84FB-4F73-8BFA-EB8471ECC27A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1F64AA1B-84FB-4F73-8BFA-EB8471ECC27A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1F64AA1B-84FB-4F73-8BFA-EB8471ECC27A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1F64AA1B-84FB-4F73-8BFA-EB8471ECC27A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 		{B279108C-1851-4691-8FA3-7C1A4665B82E} = {7B7D5A5A-F69F-42C3-A512-421A60AB6658}
 		{E736153F-03E2-465C-9588-C8B652457118} = {C88DF63A-1821-4048-85A7-61983FA9E5FE}
 		{65AAC41B-C089-45D3-8373-0EA0A19D483D} = {E736153F-03E2-465C-9588-C8B652457118}
+		{1F64AA1B-84FB-4F73-8BFA-EB8471ECC27A} = {E275C546-FBF5-432C-9BF3-A197516BB43A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C961468B-4DB3-4A0B-9C8D-F35BBFD6EA99}

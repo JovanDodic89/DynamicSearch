@@ -5,5 +5,7 @@
 		<MicrosoftExtensionsConfigurationBinder>7.0.4</MicrosoftExtensionsConfigurationBinder>
 		<EFCore>7.0.8</EFCore>
 		<MicrosoftCodeAnalysis>4.6.0</MicrosoftCodeAnalysis>
+		<Mediator>12.0.1</Mediator>
+		<FluentValidation>11.6.0</FluentValidation>
 	</PropertyGroup>
 </Project>
