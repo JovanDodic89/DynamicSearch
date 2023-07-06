@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{0EBDCCDB-B04
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{7B7D5A5A-F69F-42C3-A512-421A60AB6658}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicSearch.Api", "DynamicSearchApi\DynamicSearch.Api.csproj", "{FFAFE2B1-8FA4-47FD-A44D-3ABA2191CCB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicSearch.Api", "DynamicSearch.Api\DynamicSearch.Api.csproj", "{FFAFE2B1-8FA4-47FD-A44D-3ABA2191CCB8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{E275C546-FBF5-432C-9BF3-A197516BB43A}"
 EndProject
