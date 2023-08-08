@@ -1,10 +1,8 @@
-﻿using DynamicSearch.Application.Searches.Queries.SearchClient;
-using DynamicSearch.Persistance;
+﻿using ABC.Microservices.Common.Extensions.API.ModelBinders;
+using DynamicSearch.Application.Searches.Queries.SearchClient;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
-using System.Reflection;
 
 namespace DynamicSearch.Api.Controllers
 {
@@ -23,16 +21,7 @@ namespace DynamicSearch.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
-        public async Task<ActionResult> Search([FromQuery] SearchClientQueryCommand searchClientQueryCommand)
-        {
-            var result = await _mediator.Send(searchClientQueryCommand);
-
-            if (result == null || result.TotalCount == 0)
-            {
-                return NoContent();
-            }
-
-            return Ok(result);
-        }
+        public async Task<ActionResult> Search([ModelBinder(typeof(QueryCommandModelBinder))] SearchClientQueryCommand searchClientQueryCommand)
+            => Ok(await _mediator.Send(searchClientQueryCommand));
     }
 }

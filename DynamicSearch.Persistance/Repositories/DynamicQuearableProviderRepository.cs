@@ -21,7 +21,7 @@ namespace DynamicSearch.Persistance.Repositories
 
             var entityTypes = dynamicContext.Model.GetEntityTypes();
 
-            return (IQueryable<object>)dynamicContext.Query("jole.Models.Jole");
+            return (IQueryable<object>)dynamicContext.Query("chat_gpt.Models.Author");
         }
     }
 }

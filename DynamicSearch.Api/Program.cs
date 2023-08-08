@@ -1,17 +1,18 @@
-using DynamicSearch.Api.Interceptors;
 using DynamicSearch.Application.Searches.Queries.SearchClient;
 using DynamicSearch.Domain.Interfaces;
-using DynamicSearch.Persistance;
 using DynamicSearch.Persistance.Repositories;
 using FluentValidation;
-using FluentValidation.AspNetCore;
-using Microsoft.EntityFrameworkCore;
-using System;
+using DynamicSearch.Application;
+using DynamicSearch.Api.Filters;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using DynamicSearch.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
 builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
               .AddJsonFile("configuration/appsettings.json")
@@ -20,15 +21,13 @@ builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
               .Build();
 
 
-builder.Services.AddMvc();
+builder.Services.AddMvc(opt => { opt.Filters.Add<ApiExceptionFilterAttribute>(); });
 builder.Services.AddPersistanceServices(builder.Configuration);
 
 builder.Services.AddMediatR(c => c.RegisterServicesFromAssemblyContaining<SearchClientQueryCommand>());
-builder.Services.AddFluentValidationAutoValidation();
+builder.Services.AddApplication();
 
 builder.Services.AddScoped<IValidator<SearchClientQueryCommand>, SearchClientQueryCommandValidator>();
-builder.Services.AddTransient<IValidatorInterceptor, FluentValidationInterceptor>();
-
 builder.Services.AddScoped<IQuearableProviderRepository, DynamicQuearableProviderRepository>();
 
 var app = builder.Build();

@@ -6,9 +6,9 @@ namespace DynamicSearch.Application.Searches.Queries.SearchClient
     {
         public SearchClientQueryCommandValidator()
         {
-            //RuleFor(e => e.ClientName)
-            //    .NotEmpty()
-            //    .MaximumLength(12);
+            RuleFor(e => e.ClientName)
+                .NotEmpty()
+                .MaximumLength(12);
         }
     }
 }
