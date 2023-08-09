@@ -1,6 +1,7 @@
 ﻿using DynamicSearch.Domain.Interfaces;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Search.By.String.Extensions;
 
 namespace DynamicSearch.Application.Searches.Queries.SearchClient
 {
@@ -15,6 +16,9 @@ namespace DynamicSearch.Application.Searches.Queries.SearchClient
 
         public async Task<SearchClientResponseDto> Handle(SearchClientQueryCommand request, CancellationToken cancellationToken)
         {
+
+            _quearableProviderRepository.Get(null, null, null).Where("");
+
             return new SearchClientResponseDto
             {
                 TotalCount = _quearableProviderRepository.Get(null, null, null).Count(),

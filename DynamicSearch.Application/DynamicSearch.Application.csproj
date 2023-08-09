@@ -11,6 +11,7 @@
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="$(FluentValidation)" />
     <PackageReference Include="MediatR" Version="$(Mediator)" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(EFCore)" />
+	<PackageReference Include="Search.By.String.Extensions" Version="1.0.2-b202308092252" />
 
   </ItemGroup>
 
