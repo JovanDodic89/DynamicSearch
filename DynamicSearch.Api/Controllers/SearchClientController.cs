@@ -16,7 +16,7 @@ namespace DynamicSearch.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("{clientName}/{schemaName}/{entity}")]
+        [HttpGet("{clientName}/{schemaName}/{entityName}")]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType((int)HttpStatusCode.NoContent)]

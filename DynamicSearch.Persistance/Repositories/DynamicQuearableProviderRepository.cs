@@ -2,6 +2,9 @@
 using DynamicSearch.Persistance.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Primitives;
+using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace DynamicSearch.Persistance.Repositories
 {
@@ -15,11 +18,74 @@ namespace DynamicSearch.Persistance.Repositories
         }
 
 
+        private static ConcurrentDictionary<string, Type> _clientContextTypes = new ConcurrentDictionary<string, Type>();
+
         public IQueryable<object> Get(string clientName, string schemaName, string entityName)
         {
-            var dynamicContext = _services.CreateScope().ServiceProvider.GetServices(typeof(DbContext)) as IEnumerable<DbContext>;
+            DbContext dynamicContext = GetDbContext(clientName);
 
-            return (IQueryable<object>)dynamicContext.ElementAt(0).Query("chat_gpt.Models.Author");
+            if(dynamicContext == null) 
+            {
+                return null;
+            }
+
+            var entityType = dynamicContext.Model
+                                           .GetEntityTypes()
+                                           .Where(exp => exp.GetSchema().ToLower() == schemaName.ToLower() && exp.ClrType.Name.ToLower() == entityName.ToLower())
+                                           .FirstOrDefault();
+
+            if(entityType == null) 
+            {
+                return null;
+            }
+
+            try
+            {
+                return (IQueryable<object>)dynamicContext.Query(entityType.ClrType.FullName);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private DbContext GetDbContext(string clientName)
+        {
+            Type clientType = null;
+
+            if (_clientContextTypes.ContainsKey(clientName))
+            {
+                clientType = _clientContextTypes[clientName];
+            }
+            else
+            {
+                clientType = GetClientTypeFromAssembly(clientName, clientType);
+            }
+
+            if (clientType == null)
+            {
+                return null;
+            }
+
+            _clientContextTypes.TryAdd(clientName, clientType);
+
+            return _services.CreateScope().ServiceProvider.GetService(clientType) as DbContext;
+        }
+
+        private static Type GetClientTypeFromAssembly(string clientName, Type clientType)
+        {
+            foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                foreach (Type t in a.GetTypes())
+                {
+                    if (t.Name.ToLower() == clientName.ToLower())
+                    {
+                        return t;
+                    }
+                }
+            }
+
+            return null;
         }
     }
 }

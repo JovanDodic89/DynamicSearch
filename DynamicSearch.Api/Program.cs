@@ -20,7 +20,6 @@ builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
               .AddEnvironmentVariables()
               .Build();
 
-
 builder.Services.AddMvc(opt => { opt.Filters.Add<ApiExceptionFilterAttribute>(); });
 builder.Services.AddPersistanceServices(builder.Configuration);
 

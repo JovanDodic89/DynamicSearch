@@ -2,6 +2,7 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Search.By.String.Extensions;
+using System.Reflection;
 
 namespace DynamicSearch.Application.Searches.Queries.SearchClient
 {
@@ -16,17 +17,31 @@ namespace DynamicSearch.Application.Searches.Queries.SearchClient
 
         public async Task<SearchClientResponseDto> Handle(SearchClientQueryCommand request, CancellationToken cancellationToken)
         {
+            IQueryable<object> query = _quearableProviderRepository.Get(request.ClientName, request.SchemaName, request.EntityName);
 
-            _quearableProviderRepository.Get(null, null, null).Where("");
+            MethodInfo methodInfo = typeof(SearchClientQueryCommandHandler).GetMethod(nameof(Handle), BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo generic = methodInfo.MakeGenericMethod(query.ElementType);
+
+            Task getResultTask = (Task)generic.Invoke(this, new object[]{ query, request, cancellationToken });
+            await getResultTask.ConfigureAwait(false);
+
+            return (SearchClientResponseDto)getResultTask.GetType().GetProperty("Result").GetValue(getResultTask);
+        }
+
+        private async Task<SearchClientResponseDto> Handle<TSource>(IQueryable<object> query, SearchClientQueryCommand request, CancellationToken cancellationToken)
+            where TSource : class
+        {
+            IQueryable<TSource> sourceQuery = query as IQueryable<TSource>;
+
+            sourceQuery = sourceQuery.Where(request.SearchString);
 
             return new SearchClientResponseDto
             {
-                TotalCount = _quearableProviderRepository.Get(null, null, null).Count(),
-                Items = (await _quearableProviderRepository.Get(null, null, null)
-                                                           .Skip(request.Page)
-                                                           .Take(request.PageLimit)
-                                                           .ToListAsync())
-                                                           .AsReadOnly(),
+                TotalCount = await sourceQuery.CountAsync(cancellationToken),
+                Items = (await sourceQuery.Skip((request.Page - 1) * request.PageLimit)
+                                  .Take(request.PageLimit)
+                                  .ToListAsync<object>(cancellationToken))
+                                  .AsReadOnly(),
                 Page = request.Page,
                 PageLimit = request.PageLimit
             };

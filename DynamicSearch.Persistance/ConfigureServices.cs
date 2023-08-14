@@ -45,8 +45,7 @@ namespace DynamicSearch.Persistance
                     ContextNamespace = $"{client.Name}.Context",
                     ModelNamespace = $"{client.Name}.Models",
                     SuppressConnectionStringWarning = true,
-                    UseNullableReferenceTypes = true,
-                    
+                    UseNullableReferenceTypes = true
                 };
 
                 var scaffoldedModelSources = scaffolder.ScaffoldModel(connectionString, dbOpts, modelOpts, codeGenOpts);
@@ -162,7 +161,6 @@ namespace DynamicSearch.Persistance
             public string Name { get; set; }
             public List<string> SchemaNames { get; set; }
             public List<string> IncludeTables { get; set; }
-            public List<string> ExcludeTables { get; set; }
         }
 
         private class NoPluralizer : IPluralizer

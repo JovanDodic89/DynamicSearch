@@ -5,6 +5,8 @@ namespace DynamicSearch.Application.Searches.Queries.SearchClient
     public class SearchClientQueryCommand : IRequest<SearchClientResponseDto>
     {
         public string ClientName { get; set; }
+        public string SchemaName { get; set; }
+        public string EntityName { get; set; }
         public int Page { get; set; }
         public int PageLimit { get; set; }
         public string SearchString { get; set; }
