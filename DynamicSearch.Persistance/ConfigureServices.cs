@@ -26,10 +26,6 @@ namespace DynamicSearch.Persistance
             return services;
         }
 
-        private static Type _test;
-
-        public static Type Type { get { return _test; } }
-
         private static void AddDbContexts(IServiceCollection services, IConfiguration configuration)
         {
             var clients = GetClients(configuration);
@@ -49,7 +45,8 @@ namespace DynamicSearch.Persistance
                     ContextNamespace = $"{client.Name}.Context",
                     ModelNamespace = $"{client.Name}.Models",
                     SuppressConnectionStringWarning = true,
-                    UseNullableReferenceTypes = true
+                    UseNullableReferenceTypes = true,
+                    
                 };
 
                 var scaffoldedModelSources = scaffolder.ScaffoldModel(connectionString, dbOpts, modelOpts, codeGenOpts);
@@ -74,10 +71,8 @@ namespace DynamicSearch.Persistance
 
                 DbContext dynamicContext = (DbContext)constr.Invoke(null);
 
-                MethodInfo method = typeof(Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions).GetMethods().Where(exp => exp.Name == "AddDbContext").First();
+                MethodInfo method = typeof(EntityFrameworkServiceCollectionExtensions).GetMethods().Where(exp => exp.Name == "AddDbContext").First();
                 MethodInfo generic = method.MakeGenericMethod(dynamicContext.GetType());
-
-                _test = dynamicContext.GetType();
 
                 generic.Invoke(services, new[] { services, null, null, null });
             }
@@ -155,7 +150,7 @@ namespace DynamicSearch.Persistance
                .AddSingleton<IDatabaseModelFactory, SqlServerDatabaseModelFactory>()
                .AddSingleton<IProviderConfigurationCodeGenerator, SqlServerCodeGenerator>()
                .AddSingleton<IScaffoldingModelFactory, RelationalScaffoldingModelFactory>()
-               .AddSingleton<IPluralizer, Bricelam.EntityFrameworkCore.Design.Pluralizer>()
+               .AddSingleton<IPluralizer, NoPluralizer>()
                .AddSingleton<ProviderCodeGeneratorDependencies>()
                .AddSingleton<AnnotationCodeGeneratorDependencies>()
                .BuildServiceProvider()
@@ -168,6 +163,19 @@ namespace DynamicSearch.Persistance
             public List<string> SchemaNames { get; set; }
             public List<string> IncludeTables { get; set; }
             public List<string> ExcludeTables { get; set; }
+        }
+
+        private class NoPluralizer : IPluralizer
+        {
+            public string Pluralize(string identifier)
+            {
+                return identifier;
+            }
+
+            public string Singularize(string identifier)
+            {
+                return identifier;
+            }
         }
     }
 }

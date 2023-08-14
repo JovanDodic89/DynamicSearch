@@ -17,11 +17,9 @@ namespace DynamicSearch.Persistance.Repositories
 
         public IQueryable<object> Get(string clientName, string schemaName, string entityName)
         {
-            var dynamicContext = _services.CreateScope().ServiceProvider.GetService(ConfigureServices.Type) as DbContext;
+            var dynamicContext = _services.CreateScope().ServiceProvider.GetServices(typeof(DbContext)) as IEnumerable<DbContext>;
 
-            var entityTypes = dynamicContext.Model.GetEntityTypes();
-
-            return (IQueryable<object>)dynamicContext.Query("chat_gpt.Models.Author");
+            return (IQueryable<object>)dynamicContext.ElementAt(0).Query("chat_gpt.Models.Author");
         }
     }
 }
