@@ -1,7 +1,7 @@
 # DynamicSearch
 One service to connect to any database, and then easy perform a search for complex relational data.
 
-# Shot story
+# Short story
 The service read configuration file, and uses a Entity Framework Scaffold options (Reverse Engineering) to creates Contexts, Entities, DbSets and 
 temporary (until service is alive) store them into memory. Then a full search of loaded entities is exposed trough REST API.
 
@@ -25,4 +25,13 @@ Bellow is json represent of configuration file:
       }
     ]
 ```
+
+Json file consists of an array of Clients. Bellow is table whith explanation of Client properties:
+|    Property name      | Description     |  Additional description|
+| ------------- | ------------- | -------------
+|       ConnectionString     | An expression that contains the parameters required for the applications to connect a database server   | /|
+|       Name    | Unique Client name.   | Only one uniqu name in entire array of Clients.|
+|       SchemaNames    | Database schema names for service to search and include in scaffold process.  | Empty array to include all.|
+|       IncludeTables    | Database table names for service to search and include in scaffold process.  |Empty array to include all.|
+
 
