@@ -14,6 +14,12 @@ namespace DynamicSearch.Application.Searches.Queries.SearchClient
 
             RuleFor(e => e.EntityName)
                 .NotEmpty();
+
+            RuleFor(e => e.Page)
+                .GreaterThanOrEqualTo(1);
+
+            RuleFor(e => e.PageLimit)
+               .GreaterThanOrEqualTo(1);
         }
     }
 }

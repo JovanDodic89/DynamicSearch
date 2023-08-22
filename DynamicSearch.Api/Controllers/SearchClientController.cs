@@ -22,6 +22,15 @@ namespace DynamicSearch.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.NoContent)]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
         public async Task<ActionResult<SearchClientResponseDto>> Search([ModelBinder(typeof(QueryCommandModelBinder))] SearchClientQueryCommand searchClientQueryCommand)
-            => Ok(await _mediator.Send(searchClientQueryCommand));
+        {
+            var result = await _mediator.Send(searchClientQueryCommand);
+
+            if (result.TotalCount == 0)
+            {
+                return NoContent();
+            }
+
+           return Ok(result);
+        }
     }
 }
