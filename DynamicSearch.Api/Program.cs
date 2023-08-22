@@ -10,6 +10,8 @@ using DynamicSearch.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.TryAddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -30,6 +32,12 @@ builder.Services.AddScoped<IValidator<SearchClientQueryCommand>, SearchClientQue
 builder.Services.AddScoped<IQuearableProviderRepository, DynamicQuearableProviderRepository>();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseHttpsRedirection();
 

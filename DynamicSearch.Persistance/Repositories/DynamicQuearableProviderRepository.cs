@@ -78,7 +78,8 @@ namespace DynamicSearch.Persistance.Repositories
             {
                 foreach (Type t in a.GetTypes())
                 {
-                    if (t.Name.ToLower() == clientName.ToLower())
+                    if (t.Name.ToLower() == clientName.ToLower()
+                       && t.FullName.ToLower().StartsWith($"{clientName.ToLower()}.context."))
                     {
                         return t;
                     }
